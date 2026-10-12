@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#4f2da8">
+<title>Kuiz Interaktif Asas Sajian Makanan — Set B</title>
+<style>
+:root{--purple:#4f2da8;--purple2:#7654d8;--ink:#241b3d;--muted:#716a85;--bg:#f5f2ff;--green:#16865b;--red:#c43d50;--line:#e5def8}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top left,#e9e0ff 0,transparent 34%),var(--bg);font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);min-height:100vh}
+header{background:linear-gradient(125deg,#392078,#6b45c7);color:#fff;padding:28px 18px 34px;text-align:center}
+.brand{display:inline-flex;align-items:center;gap:8px;background:#ffffff20;border:1px solid #ffffff40;border-radius:999px;padding:7px 13px;font-size:12px;font-weight:800;letter-spacing:.08em}
+header h1{font-size:clamp(25px,5vw,40px);line-height:1.12;margin:14px auto 9px;max-width:850px}header p{margin:0;color:#eee8ff}
+main{width:min(800px,100% - 24px);margin:22px auto 40px}
+.panel{background:#fff;border:1px solid #eee9fb;border-radius:24px;padding:clamp(18px,4vw,30px);box-shadow:0 12px 35px #3d287b12}
+.hidden{display:none!important}.intro{text-align:center}.heroicon{font-size:58px;margin:4px 0 8px}.intro h2,.result h2{font-size:27px;margin:8px 0}.intro p{line-height:1.7;color:var(--muted);max-width:570px;margin:10px auto 20px}
+.pills{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:18px 0}.pill{background:#f0ebff;color:#4e329c;border-radius:999px;padding:8px 12px;font-weight:750;font-size:13px}
+button{font:inherit;cursor:pointer}.btn{border:0;border-radius:14px;padding:14px 19px;font-weight:800;transition:transform .12s,filter .12s}.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}.primary{background:var(--purple);color:white}.secondary{background:#eee8ff;color:#4d3295}.wide{width:100%}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;text-align:center;color:var(--muted);font-size:11px;font-weight:850;letter-spacing:.06em}.stat strong{display:block;font-size:24px;color:var(--purple);letter-spacing:0;margin-top:3px}
+.progressline{height:9px;background:#eee9fb;border-radius:99px;overflow:hidden;margin-bottom:21px}.progressfill{height:100%;width:0;background:linear-gradient(90deg,#26b27a,#6dd6a9);transition:width .25s}
+.qmeta{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--muted);font-size:13px;font-weight:800}.tag{background:#f0ebff;color:#5639a4;border-radius:8px;padding:6px 9px}
+.question{font-size:clamp(20px,3.5vw,25px);line-height:1.4;font-weight:850;margin:18px 0 22px}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:11px}.answer{display:flex;align-items:flex-start;gap:11px;text-align:left;background:#fff;border:2px solid var(--line);border-radius:15px;padding:15px;min-height:78px;color:var(--ink);line-height:1.45}.answer:hover:not(:disabled){border-color:#a38ce8;background:#faf8ff}.letter{display:grid;place-items:center;flex:0 0 29px;height:29px;border-radius:9px;background:#f0ebff;color:#5236a1;font-weight:900}.answer:disabled{cursor:default}.answer.correct{background:#e4f8ee;border-color:#35ae7d}.answer.correct .letter{background:#16865b;color:#fff}.answer.wrong{background:#fff0f1;border-color:#dc6471}.answer.wrong .letter{background:#c43d50;color:#fff}
+.feedback{margin-top:15px;padding:14px 16px;border-radius:14px;line-height:1.5;font-weight:700}.feedback.good{background:#e4f8ee;color:#116443}.feedback.bad{background:#fff4df;color:#7c4a08}
+.actions{display:flex;gap:10px;margin-top:19px}.actions .secondary{flex:0 0 auto}.actions .primary{flex:1}.result{text-align:center}.scorecircle{width:145px;height:145px;margin:20px auto 15px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(140deg,#eee8ff,#d9f7e8);border:8px solid #fff;box-shadow:0 0 0 2px #e5def8}.scorecircle strong{font-size:32px;color:var(--purple);display:block}.scorecircle span{font-size:12px;color:var(--muted);font-weight:800}
+.review{margin-top:22px;text-align:left}.review h3{margin-bottom:10px}.reviewitem{border:1px solid var(--line);border-radius:13px;padding:13px;margin:9px 0;line-height:1.5}.reviewitem b{display:block;margin-bottom:5px}.reviewitem small{color:var(--muted)}
+footer{text-align:center;color:#817a96;font-size:12px;margin:18px 0 0;line-height:1.6}
+@media(max-width:560px){.answers{grid-template-columns:1fr}.answer{min-height:60px}.stats{gap:6px}.stat{padding:10px 4px}.actions{flex-direction:column-reverse}.actions .secondary{width:100%}.panel{border-radius:19px}}
+@media print{header{background:#fff;color:#222}body{background:#fff}.btn{display:none}.panel{box-shadow:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">✦ LATIHAN DIGITAL · SET B</div>
+  <h1>Kuiz Interaktif Asas Sajian Makanan</h1>
+  <p>Uji pengetahuan anda • 15 soalan objektif</p>
+</header>
+<main>
+  <section id="welcome" class="panel intro">
+    <div class="heroicon">🍽️</div>
+    <h2>Selamat datang ke Cabaran ASM!</h2>
+    <p>Jawab soalan berkaitan penyajian makanan dan minuman, susunan meja bufet, operasi bar, etika melayan tetamu dan prosedur mengambil pesanan.</p>
+    <div class="pills"><span class="pill">📝 15 soalan</span><span class="pill">⚡ Maklum balas segera</span><span class="pill">🏆 Keputusan akhir</span></div>
+    <button class="btn primary wide" onclick="startQuiz()">MULA KUIZ&nbsp; →</button>
+  </section>
+
+  <section id="quiz" class="hidden">
+    <div class="stats">
+      <div class="stat">SOALAN<strong id="counter">1/15</strong></div>
+      <div class="stat">MARKAH<strong id="score">0</strong></div>
+      <div class="stat">SIRI BETUL<strong id="streak">0 🔥</strong></div>
+    </div>
+    <div class="panel">
+      <div class="progressline"><div id="progress" class="progressfill"></div></div>
+      <div class="qmeta"><span id="qnum">SOALAN 1</span><span class="tag">PILIH SATU JAWAPAN</span></div>
+      <div id="question" class="question"></div>
+      <div id="answers" class="answers"></div>
+      <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+      <div class="actions"><button class="btn secondary" onclick="confirmExit()">Keluar</button><button id="next" class="btn primary" onclick="nextQuestion()" disabled>Soalan seterusnya →</button></div>
+    </div>
+  </section>
+
+  <section id="result" class="panel result hidden">
+    <div class="heroicon">🎉</div><h2>Kuiz selesai!</h2>
+    <p id="resultMessage">Tahniah kerana mencuba.</p>
+    <div class="scorecircle"><div><strong id="finalScore">0/15</strong><span id="percent">0%</span></div></div>
+    <p id="resultAdvice"></p>
+    <div class="actions"><button class="btn secondary" onclick="showReview()">Semak jawapan</button><button class="btn primary" onclick="shareResult()">Kongsi keputusan</button></div>
+    <div id="review" class="review hidden"><h3>Semakan jawapan</h3><div id="reviewItems"></div></div>
+    <button class="btn primary wide" style="margin-top:12px" onclick="startQuiz()">CUBA LAGI ↻</button>
+  </section>
+  <footer>Kuiz latihan murid · Asas Sajian Makanan · Set B<br>Untuk pembelajaran dan ulang kaji.</footer>
+</main>
+<script>
+const questions = [
+["Susunan peralatan meja bufet yang betul ialah…",["Pinggan di awal meja, sudu dan garpu di akhir meja","Sudu dan garpu di awal meja, pinggan di akhir meja","Gelas di awal meja, pinggan di tengah meja","Peralatan pencuci mulut di awal meja, pinggan di akhir meja"],0],
+["Majlis makan malam untuk 300 tetamu mahu tetamu memilih makanan sendiri. Kaedah manakah paling sesuai?",["Buffet Set","Dome Set","Western Set","Chinese Set"],0],
+["Berapakah anggaran tetamu yang sesuai untuk satu dome set?",["2 hingga 4 orang","5 hingga 6 orang","8 hingga 10 orang","20 hingga 30 orang"],0],
+["Mengapakah kasut bertutup di bahagian hadapan sesuai digunakan semasa bekerja?",["Mengelakkan kaki terkena cecair panas yang tertumpah","Memudahkan pergerakan dan pengurusan","Memberikan penampilan yang bergaya","Mengimbangi berat badan"],0],
+["Berapakah anggaran labuh alas meja di sekeliling meja?",["5 cm hingga 10 cm","10 cm hingga 20 cm","30 cm hingga 40 cm","50 cm hingga 60 cm"],2],
+["Apakah urutan proses perkhidmatan penyajian dalam bilik yang betul?",["Ambil pesanan → sedia dulang/troli → hantar makanan → kemas","Sedia dulang/troli → kemas → ambil pesanan → hantar makanan","Kemas → hantar makanan → ambil pesanan → sedia dulang/troli","Hantar makanan → kemas → ambil pesanan → sedia dulang/troli"],0],
+["Bagaimanakah botol minuman disusun ketika persediaan pembukaan bar?",["Semua botol mengikut saiz sahaja","Stok baharu di hadapan stok lama","Stok lama di hadapan stok baharu","Semua label menghadap rak"],2],
+["Apakah tindakan bartender apabila jus tertumpah di ruang kerja?",["Mengalihkan peralatan ke bahagian lain","Membersihkan tumpahan dengan segera","Menutup tumpahan menggunakan napkin","Membiarkan tumpahan sehingga operasi tamat"],1],
+["Apakah kepentingan bilasan akhir mesin pencuci gelas?",["Mengeringkan gelas dengan lebih cepat","Mengurangkan penggunaan air","Mengelakkan gelas daripada pecah","Memastikan gelas bersih daripada bahan pencuci"],3],
+["Apakah fungsi jigger dalam operasi bar?",["Menapis koktel","Memotong kulit lemon","Membuka penutup botol","Mengukur minuman beralkohol"],3],
+["Dari arah manakah kad menu diserahkan kepada tetamu berdasarkan skema?",["Kiri","Kanan","Hadapan","Belakang"],1],
+["Tetamu wanita warga emas dan tetamu lelaki tiba serentak. Apakah tindakan paling sesuai?",["Minta kedua-duanya duduk sendiri","Dudukkan tetamu lelaki dahulu","Tarik kerusi yang paling hampir dahulu","Tarik kerusi tetamu wanita warga emas dahulu"],3],
+["Apakah kesan mengangkat sedikit kerusi ketika menariknya untuk tetamu?",["Mengurangkan bunyi ketika kerusi dialihkan","Memastikan kedudukan kerusi sentiasa teratur","Memudahkan pergerakan kerusi di ruang makan","Mengelakkan kerusi daripada berganjak semasa digunakan"],0],
+["Apakah tindakan pramusaji selepas tetamu menutup kad menu?",["Mengemas meja","Membuka napkin","Mengambil pesanan","Menghidangkan makanan utama"],2],
+["Pilih urutan mengambil pesanan yang betul: I. Tulis pesanan. II. Ulang pesanan. III. Beri tumpuan kepada tetamu. IV. Hantar pesanan.",["I, II, III, IV","II, III, I, IV","III, I, II, IV","III, II, IV, I"],2]
+];
+let order=[],index=0,score=0,streak=0,locked=false,answersLog=[];
+const $=id=>document.getElementById(id);
+function startQuiz(){order=questions.map((_,i)=>i);index=0;score=0;streak=0;locked=false;answersLog=[];['welcome','result'].forEach(id=>$(id).classList.add('hidden'));$('quiz').classList.remove('hidden');renderQuestion();window.scrollTo({top:0,behavior:'smooth'})}
+function renderQuestion(){locked=false;let q=questions[order[index]];$('counter').textContent=(index+1)+'/'+questions.length;$('score').textContent=score;$('streak').textContent=streak+' 🔥';$('qnum').textContent='SOALAN '+(index+1);$('progress').style.width=(index/questions.length*100)+'%';$('question').textContent=q[0];$('answers').innerHTML='';q[1].forEach((answer,i)=>{let b=document.createElement('button');b.className='answer';b.innerHTML='<span class="letter">'+String.fromCharCode(65+i)+'</span><span>'+escapeHtml(answer)+'</span>';b.onclick=()=>selectAnswer(i,b);$('answers').appendChild(b)});$('feedback').className='feedback hidden';$('feedback').textContent='';$('next').disabled=true;$('next').textContent=index===questions.length-1?'Lihat keputusan →':'Soalan seterusnya →'}
+function selectAnswer(choice,button){if(locked)return;locked=true;let q=questions[order[index]],correct=choice===q[2];document.querySelectorAll('.answer').forEach(b=>b.disabled=true);if(correct){score++;streak++;button.classList.add('correct')}else{streak=0;button.classList.add('wrong');document.querySelectorAll('.answer')[q[2]].classList.add('correct')}answersLog.push({qIndex:order[index],choice,correct});$('score').textContent=score;$('streak').textContent=streak+' 🔥';let f=$('feedback');f.className='feedback '+(correct?'good':'bad');f.textContent=correct?'✓ Betul! Bagus, teruskan!':'Jawapan yang tepat: '+String.fromCharCode(65+q[2])+'. '+q[1][q[2]];$('next').disabled=false}
+function nextQuestion(){if(!locked)return;index++;if(index>=questions.length){finishQuiz();return}renderQuestion();window.scrollTo({top:0,behavior:'smooth'})}
+function finishQuiz(){$('quiz').classList.add('hidden');$('result').classList.remove('hidden');$('progress').style.width='100%';let pct=Math.round(score/questions.length*100);$('finalScore').textContent=score+'/'+questions.length;$('percent').textContent=pct+'%';$('resultMessage').textContent=pct>=85?'🌟 Cemerlang! Anda menunjukkan penguasaan yang baik.':pct>=65?'👏 Bagus! Teruskan ulang kaji untuk mengukuhkan pengetahuan.':'💪 Terus berlatih. Semak jawapan dan cuba sekali lagi.';$('resultAdvice').textContent='Anda menjawab '+score+' daripada '+questions.length+' soalan dengan betul.';$('review').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})}
+function showReview(){let host=$('reviewItems');host.innerHTML='';answersLog.forEach((entry,n)=>{let q=questions[entry.qIndex],el=document.createElement('div');el.className='reviewitem';el.innerHTML='<b>'+(n+1)+'. '+escapeHtml(q[0])+'</b><div>'+(entry.correct?'✓ Jawapan anda: ':'✗ Jawapan anda: ')+escapeHtml(q[1][entry.choice])+'</div><small>Jawapan betul: '+String.fromCharCode(65+q[2])+'. '+escapeHtml(q[1][q[2]])+'</small>';host.appendChild(el)});$('review').classList.remove('hidden');$('review').scrollIntoView({behavior:'smooth',block:'start'})}
+function shareResult(){let pct=Math.round(score/questions.length*100),msg='Keputusan Kuiz Interaktif Asas Sajian Makanan — Set B: '+score+'/'+questions.length+' ('+pct+'%).';if(navigator.share){navigator.share({title:'Keputusan Kuiz ASM Set B',text:msg}).catch(()=>copyResult(msg))}else copyResult(msg)}
+function copyResult(text){if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(()=>alert('Keputusan disalin. Anda boleh tampal dalam WhatsApp.')).catch(()=>prompt('Salin keputusan ini:',text))}else prompt('Salin keputusan ini:',text)}
+function confirmExit(){if(confirm('Keluar daripada kuiz sekarang? Kemajuan semasa tidak akan disimpan.')){$('quiz').classList.add('hidden');$('welcome').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'})}}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+</script>
+</body>
+</html>
